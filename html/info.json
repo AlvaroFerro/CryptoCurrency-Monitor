@@ -1,0 +1,61 @@
+{"appinfo": {
+    "widget": {
+        "type": "text/javascript",
+        "mainUrl": "baseUrl = 'https://widgets.cryptocompare.com/'; var scripts = document.getElementsByTagName('script');var embedder = scripts[ scripts.length - 1 ];%s;(function (){var appName = encodeURIComponent(window.location.hostname);if(appName==''){appName='local';}var s = document.createElement('script');s.type = 'text/javascript';s.async = true;var theUrl = baseUrl+'%s';s.src = theUrl + ( theUrl.indexOf('?') >= 0 ? '&' : '?') + 'app=' + appName;embedder.parentNode.appendChild(s);})();"
+    },
+    "internalURL": {
+        "chart": "serve/v1/coin/chart?fsym=%s&tsym=%s&period=%s",
+        "advanced": "serve/v3/coin/chart?fsym=%s&tsyms=%s"
+    },
+    "themes": {
+        "chartWhite": "var cccTheme = {'Header':{'displayFollowers':false},'Chart':{'animation':true}};",
+        "chartDark": "var cccTheme = {'General':{'background':'#333','borderColor':'#545454','borderRadius':'4px 4px 0 0'},'Header':{'background':'#000','color':'#FFF','displayFollowers':false},'Followers':{'background':'#f7931a','color':'#FFF','borderColor':'#e0bd93','counterBorderColor':'#fdab48','counterColor':'#f5d7b2'},'Data':{'priceColor':'#FFF','infoLabelColor':'#CCC','infoValueColor':'#CCC'},'Chart':{'animation':true,'fillColor':'rgba(86,202,158,0.5)','borderColor':'#56ca9e'},'Conversion':{'background':'#000','color':'#999'}};",
+        "advanced": "var cccTheme = {'Tabs':{'activeBorderColor':'#4b7db4'},'Chart':{'animation':true}};"
+    },
+	"other": {
+		"scrolling": {
+			"src": "https://widget.coinlib.io/widget?type=horizontal_v2&theme=light&pref_coin_id=1505&invert_hover=",
+			"width": "100%", 
+			"height": 36, 
+			"autoscrolling": "auto", 
+			"marginheight": 0, 
+			"frameborder": 0, 
+			"border": 0,
+			"style": 0, 
+			"margin": 0, 
+			"padding": 0
+		}
+    },
+	"BTC": {
+		"mainBTC": "https://api.blockchain.info/charts/%s?timespan=%s&scale=%s&format=json",
+		"mainBTCAvg": "https://api.blockchain.info/charts/%s?timespan=%s&scale=%s&daysAverageString=7&format=json",
+		"charts":{
+			"totalbitcoin": "total-bitcoins",
+			"mkprice": "market-price",
+			"mkcap": "market-cap",
+			"tradevol": "trade-volumen",
+			"transday": "n-transactions",
+			"transtotal": "n-transactions-total"
+		},
+		"timespan":{
+			"treinta": "30days",
+			"sesenta": "60days",
+			"cietoochenta": "180days",
+			"year": "1year",
+			"years": "2years",
+			"all" : "all"
+		},
+		"scrolling": {
+			"src": "https://widget.coinlib.io/widget?type=horizontal_v2&theme=light&pref_coin_id=1505&invert_hover=",
+			"width": "100%", 
+			"height": 36, 
+			"autoscrolling": "auto", 
+			"marginheight": 0, 
+			"frameborder": 0, 
+			"border": 0,
+			"style": 0, 
+			"margin": 0, 
+			"padding": 0
+		}
+    }
+}}

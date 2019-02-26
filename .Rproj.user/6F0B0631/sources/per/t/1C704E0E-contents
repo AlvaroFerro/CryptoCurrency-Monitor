@@ -1,0 +1,96 @@
+library(shiny)
+library(shinydashboard)
+library(shinythemes)
+library(shinyWidgets)
+library(shinycssloaders)
+library(rsconnect)
+
+title <- tags$a(icon("diamond"),
+                'Cryto Monitor')
+
+shinyUI(dashboardPage(
+  dashboardHeader(title = 'Crypto Monitor',
+                  tags$li(class = "dropdown",tags$a(href = "https://github.com/AlvaroFerro/", icon("github"), "Github", target = "_blank"))  ),
+  dashboardSidebar(sidebarMenu(
+    #Cuidado con los tabname
+    menuItem('Hello!', tabName = 'hello', icon = icon('child')),
+    
+    menuItem('BTC', tabName = 'btc', icon = icon('btc'),
+             menuSubItem('Bitcoin Circulation', tabName = 'btccirculation'),
+             menuSubItem('Market Price USD', tabName = 'mkPriceUsd'),
+             menuSubItem('Market Capitalization', tabName = 'mkCapital'),
+             menuSubItem('Exchange USD Volume', tabName = 'usdVol'),
+             menuSubItem('Total transactions per day', tabName = 'transday')
+             #menuSubItem('Total transactions', tabName = 'transtotal')
+             ),
+    
+    #menuItem('Modelo', tabName = 'modelo', icon = icon('dashboard')),
+    
+    menuItem('Charts', icon = icon('bar-chart-o'),
+      menuSubItem('Other Currencies', tabName = 'simpleChart'),
+      menuSubItem('Advanced Chart', tabName = 'advancedChart')),
+    
+    menuItem('Predictions', tabName = 'predict', icon = icon('spinner')),
+    
+    menuItem('About', tabName = 'about', icon = icon('info'),
+             menuSubItem('Author', tabName = 'author', icon = icon('address-card')),
+             menuSubItem('Business School', tabName = 'business', icon = icon('briefcase')))
+  )),
+  dashboardBody(
+    tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "css/custom.css")),
+  tabItems(
+    tabItem(tabName = 'hello', includeHTML('www/html/hello.html')),
+    tabItem(tabName = 'btc', includeHTML('www/html/btc.html')),
+    #Bitcoin Circulation graph
+    tabItem(
+      tabName = 'btccirculation',
+      h2('Bitcoins in Circulation', align = 'center'),
+      h4('The total number of bitcoins that have already been mined; in other words, the current supply of bitcoins on the network.', align = 'center'),
+      highchartOutput('btccirc') %>% withSpinner(color = "#e55252"),
+      uiOutput('totalcirc')
+    ),
+    #Market price USD graph
+    tabItem(
+      tabName = 'mkPriceUsd',
+      h2('Market Price (USD)', align = 'center'),
+      h4('Average USD market price across major bitcoin exchanges.', align = 'center'),
+      highchartOutput('mkPriceUsd') %>% withSpinner(color = "#0dc5c1"),
+      uiOutput('marketPrice')
+    ),
+    #Market capital 
+    tabItem(
+      tabName = 'mkCapital',
+      h2('Market Capitalization', align = 'center'),
+      h4('The total USD value of bitcoin supply in circulation, as calculated by the daily average market price across major exchanges.', align = 'center'),
+      highchartOutput('mkCapital') %>% withSpinner(color = "#f9b042"),
+      uiOutput('marketCapital')
+    ),
+    #USD vol
+    tabItem(
+      tabName = 'usdVol',
+      h2('USD Exchange Trade Volume', align = 'center'),
+      h4('The total USD value of trading volume on major bitcoin exchanges.', align = 'center'),
+      highchartOutput('usdVol') %>% withSpinner(color = "#29d873"),
+      uiOutput('usdVolumen')
+    ),
+    #Transactions per day
+    tabItem(
+      tabName = 'transday',
+      h2('Confirmed Transactions Per Day', align = 'center'),
+      h4('The number of daily confirmed Bitcoin transactions.', align = 'center'),
+      highchartOutput('transDay') %>% withSpinner(color = "#4f4646"),
+      uiOutput('transPerDay')
+    ),
+    #Second part - Other currencies
+    tabItem(tabName = 'simpleChart', 
+      h2('More currencies'),
+      h4('Provides price information about different currencies'),
+      highchartOutput('moreCurrencies') %>% withSpinner(color = "#0dc5c1"), 
+      uiOutput('moreCurrenciesMenu')
+    ),
+    tabItem(tabName = 'advancedChart', uiOutput('advanced')),
+    #Author and Busines
+    tabItem(tabName = 'author', includeHTML(author)),
+    tabItem(tabName = 'business', includeHTML(school))
+  ))
+))

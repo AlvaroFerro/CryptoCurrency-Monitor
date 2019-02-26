@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1550577811473.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "3ECA1525",
+    "lastKnownWriteTime" : 25896054344122445,
+    "last_content_update" : 1550577811473,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "61045210",
+        "caption" : "BTC",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=BTC&cache_key=61045210",
+        "displayedObservations" : 31,
+        "environment" : "",
+        "object" : "BTC",
+        "preview" : 0,
+        "totalObservations" : 31,
+        "variables" : 7
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

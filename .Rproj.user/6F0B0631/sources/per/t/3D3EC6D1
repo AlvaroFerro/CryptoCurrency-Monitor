@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1544992403189.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "3D3EC6D1",
+    "lastKnownWriteTime" : 0,
+    "last_content_update" : 1544992403189,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "d3f5921ec36a40b7a0b894774c83998b",
+        "name" : "plot",
+        "title" : "plot"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}

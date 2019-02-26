@@ -1,0 +1,242 @@
+library(rjson)
+library(jsonlite)
+library(RCurl)
+library(cryptor)
+library(highcharter)
+library(httr)
+library(magrittr)
+library(timeSeries)
+library(scales)
+library(ggplot2)
+library(tibble)
+library(Rcpp)
+library(crypto)
+
+sessionInfo()
+
+url = 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=XPR,USD,EUR'
+sd <- GET(url)
+http_status(sd)
+
+
+response = fromJSON('https://www.cryptocompare.com/api/data/coinlist')
+df = data.table::rbindlist(response$Data, fill=TRUE)
+View(df)
+
+myJS <- fromJSON('C:/Users/frank/OneDrive/CUNEF - MDS/Técnicas de Visualización en DS/ProyectoFinal/html/info.json')
+myJS$appinfo$BTC
+
+
+
+hchart(density(mtcars$mpg), type = 'area')
+str(mtcars)
+
+GET('https://api.blockchain.info/charts/market-price?format=json')
+df <- as.data.frame(fromJSON('https://api.blockchain.info/charts/market-price?timespan=1year&format=json'))
+hchart(density(df$values.y), type = 'area', hcaes(df$values.y, df$values.x)) + hc_add_series(df)
+
+convertDate <- function(x){
+  date <- as.POSIXlt(x,
+                     tryFormats = c("%Y-%m-%d %H:%M",
+                                    "%Y/%m/%d %H:%M",
+                                    "%Y-%m-%d %H:%M",
+                                    "%Y/%m/%d %H:%M",
+                                    "%Y-%m-%d",
+                                    "%Y/%m/%d"), origin = "1970-01-01")
+  return(date)
+}
+
+df$fecha <- convertDate(df$values.x)
+df$fecha
+ts(df$fecha)
+
+as.Date(convertDate(df$values.x), '%y/%m/%d %h')
+
+help("as.Date")
+
+as.ts(df$values.x)
+
+df$fecha <- months.POSIXt(df$fecha)
+
+daterange <- c(min(df$fecha), max(df$fecha))
+daterange
+
+axis
+
+View(df)
+hcc <- highchart() %>%
+  hc_xAxis(df$values.x) %>%
+  hc_add_series(name = 'Test2', data = df$values.y) %>%
+  hc_add_series(name = 'Log', data = log(df$values.y)) %>%
+  hc_colors('red') %>%
+  hc_add_theme(hc_theme_economist())
+
+hccc <- highchart() %>%
+  hc_chart(type = input$charttype) %>%
+  hc_xAxis(categories = df$values.x, title = list(text = 'Date'), type = "datetime") %>%
+  hc_add_series(data = df$values.y, name = "Value") %>%
+  hc_title(text = 'Total bitcoin circulation') %>%
+  hc_add_theme(getTheme(input$themeid))
+
+hchart(df, 'line',  hcaes(values.x, round(values.y, 2))) %>%
+  hc_xAxis(title = list(text = 'Date'), type = "datetime") %>%
+  hc_add_series(data = log(df$values.y)) %>%
+  hc_title(text = 'Total bitcoin circulation') %>%
+  hc_yAxis(title = 'Value') %>%
+  hc_add_theme(hc_theme_538())
+
+##### It's working #########
+hchart(df, "line",  hcaes(datetime_to_timestamp(as.Date(convertDate(df$values.x), origin = '1970-01-01')), round(values.y, 2))) %>%
+  hc_xAxis(type = "datetime") %>%
+  hc_title(text = 'Total bitcoin circulation')
+
+str(df)
+
+hchart(df, 'line', hcaes(x = as.Date(convertDate(values.x), origin = '1970-01-01'), y = values.y))
+
+datetime_to_timestamp(as.Date(convertDate(df$values.x), origin = '1970-01-01'))
+
+
+h1$x(type = 'datetime', labels = list(format = '{value:%Y-%m-%d}'))
+
+highchart() %>%
+  hc_title(text = 'Test') %>%
+  hc_add_series_scatter(mtcars$wt, mtcars$mpg, mtcars$drat)
+
+as.Date(1492214400, origin = "2009-01-03", format,
+        tryFormats = c("%Y-%m-%d %H:%M:%OS",
+                       "%Y/%m/%d %H:%M:%OS",
+                       "%Y-%m-%d %H:%M",
+                       "%Y/%m/%d %H:%M",
+                       "%Y-%m-%d",
+                       "%Y/%m/%d"))
+str(df)
+as.Date(df$values.x, )
+library(zoo)
+zoo::as.Date(14922)
+
+dff <- data_frame(
+  time = seq(as.Date("2017-01-01"), as.Date("2017-02-01"), by = 1),
+  value = sample(1000:2000, size = 32),
+  dt = datetime_to_timestamp(time)
+)
+
+hchart(dff, "scatter",  hcaes(x = dt, y = value)) %>% 
+  hc_xAxis(type = "datetime", dateTimeLabelFormats = list(day = '%d of %b'))
+
+highchart() %>%
+  hc_chart(type = "point") %>%
+  hc_xAxis(categories = dff$dt) %>%
+  hc_add_series(data = dff$value,
+                name = "mpg data",colorByPoint = TRUE) %>%
+  hc_add_theme(hc_theme_chalk())
+
+
+hchart(mpg, "scatter", hcaes(x = mpg$displ, y = mpg$hwy, group = class))
+devtools::install_github("jbkunst/highcharter")
+########## Funcion de transformacion ###########
+as.POSIXlt(1542931200,
+           tryFormats = c("%Y-%m-%d %H:%M",
+                          "%Y/%m/%d %H:%M",
+                          "%Y-%m-%d %H:%M",
+                          "%Y/%m/%d %H:%M",
+                          "%Y-%m-%d",
+                          "%Y/%m/%d"), origin = "1970-01-01")
+
+
+social <- get_social(1182)
+d <- get_coins()
+data_test <- d %>% group_by(algorithm) %>% filter(algorithm %in% 'SHA256')
+ggplot(data_test) + geom_bar(aes(algorithm)) + coord_polar('y', start = 0)
+
+ggplot(dfc[1:10, ], aes("", share, fill = Make)) +
+  geom_bar(width = 1, size = 1, color = "white", stat = "identity") +
+  coord_polar("y")
+
+crypto_history(limit = 1)
+crypto_list()
+
+crypto_history('xrp')
+sys_locale <- Sys.getlocale('LC_TIME')
+replace_encoding(sys_locale = sys_locale)
+reset
+
+unique(d$algorithm)
+
+get_coins() %>% select(coin_name) %>% arrange()
+h <- get_social(5031)
+h$social_media$Facebook
+
+get_price(c('XRP', 'BTC'), c('USD', 'EUR', 'JPY', 'CHF', 'DZD', 'ATS', 'ALL', 'GEL'))
+get_price_details('XRP', c('EUR', 'USD'))
+z <- get_historical_price('XRP', 'USD', limit = 2000)
+z
+w <- get_historical_price('BTC', 'USD', limit = 2000)
+ggplot(z) + geom_smooth(aes(time, close)) + geom_smooth(aes(time, open)) + geom_smooth(aes(time, volumefrom)) + geom_smooth(aes(time, volumeto))
+
+highchart() %>%
+  hc_chart(type = "line") %>%
+  hc_xAxis(categories = z$time) %>%
+  hc_add_series(data = w$low, name = 'Low') %>%
+  hc_add_series(data = z$high, name = 'High') %>%
+  hc_add_theme(hc_theme_538())
+
+z$time <- 
+
+library("quantmod")
+
+usdjpy <- getSymbols("USD/JPY", src = "oanda", auto.assign = FALSE)
+eurkpw <- getSymbols("EUR/KPW", src = "oanda", auto.assign = FALSE)
+
+usdjpy
+
+test <- 
+test <- list('Hola', 'mi', 'nombre', 'es')
+u <- split(test, '')
+u[[1]]
+
+get_historical_price('EOS', 'USD', limit = 500)
+
+lista <- c('EOS', 'XRP', 'BTC')
+lista[2]
+
+
+z <- get_historical_price('XRP', 'USD', limit = 10)
+z$newdate <- strptime(as.character(z$time), "%Y-%m-%d")
+z$newdate <- format(z$newdate, "%Y-%m-%d")
+
+plott <- highchart() %>%
+  hc_chart(type = "line") %>%
+  hc_xAxis(categories = z$newdate)%>%
+  hc_add_series(data = z$high)
+plott
+  #hc_add_series(data = z$low, name = 'Low 1')
+  #hc_add_series(data = zDf$low, name = 'BTC Low') %>%
+  #hc_add_series(data = z$high, name = 'High') %>%
+  #hc_add_theme(hc_theme_538())
+#plot
+  #values$chart <- plot
+lengthInput <- 2
+for (i in 1:length(lista)) {
+  #Create dataframes
+  variable <- paste('Df_', i, sep = '')
+  #Get Values for each element on selectInput
+  zDf <- get_historical_price(c(lista[i]), 'USD', limit = 10)
+  
+  assign(variable, zDf)
+  #plot %>% hc_add_series(data = dataF[,4], name = 'Low 2')
+}
+
+plott <- plott %>% hc_add_series(data = Df_1$low, name = 'Low 1')
+plott <- plott %>% hc_add_series(data = Df_2$low, name = 'Low 2')
+plot %>% hc_add_series(date = Df_2$low, name = 'Low 2')
+plott %>% hc_add_theme(hc_theme_538())
+
+paste0('Df_', 1)
+
+plot <- highchart() %>%
+  hc_chart(type = "line") %>%
+  hc_xAxis(categories = z$time) %>%
+  hc_add_series(data = Df_1$low, name = 'Low 1') %>%
+  hc_add_series(data = Df_2$low, name = 'Low 2')
+plot

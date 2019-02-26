@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1543766133499.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "18|31|23|2|\n25|84|53|2|\n55|69|67|2|\n69|64|96|2|\n99|26|112|2|\n114|31|136|2|\n138|32|142|2|\n144|34|149|2|\n151|36|156|2|\n158|33|164|2|\n166|34|171|2|\n173|41|194|2|\n196|33|226|2|\n286|16|288|15|\n291|37|300|2|\n302|40|311|2|\n313|39|322|2|\n324|36|333|2|\n335|38|344|2|\n346|44|348|2|\n350|38|356|2|\n",
+    "hash" : "746064156",
+    "id" : "338E87E1",
+    "lastKnownWriteTime" : 1550762496,
+    "last_content_update" : 1550762496527,
+    "path" : "E:/OneDrive/CUNEF - MDS/Técnicas de Visualización en DS/ProyectoFinal/html/server.R",
+    "project_path" : "html/server.R",
+    "properties" : {
+        "cursorPosition" : "249,7",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,53 @@
+.main-header .logo {
+  /*font-family: "Georgia", Fantasy, "Fantasy", fantasy/*serif;*/
+  font-family: "Jazz LET", fantasy;
+  font-weight: bolder;
+  font-size: 24px;
+}
+
+
+/* background color of header (logo part) */
+.skin-blue .main-header .logo {
+    background-color: #222b2e;
+}
+        
+
+/* background color for remaining part of the header */
+.skin-blue .main-header .navbar {
+    background-color: #67818a;
+}
+                              
+/* main sidebar 
+.skin-blue .main-sidebar {
+    background-color: #67818a;
+                              }*/
+
+/* active sidebar menu item 
+.skin-blue .main-sidebar .sidebar .sidebar-menu .active a{
+    background-color: white;
+    color:black;
+}*/
+
+/* sidebar menuitems
+.skin-blue .main-sidebar .sidebar .sidebar-menu a{
+    background-color: orange;
+    color: black;
+}*/
+
+/* sidebar menuitems when mouse hover 
+.skin-blue .main-sidebar .sidebar .sidebar-menu a:hover{
+    background-color: brown;
+    color:white;
+}*/
+Highcharts.chart('container', {
+    xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: { // don't display the dummy year
+            month: '%e. %b',
+            year: '%b'
+        },
+        title: {
+            text: 'Date'
+        }
+    }
+});
